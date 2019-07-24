@@ -1468,3 +1468,25 @@ $ source /etc/profile
 java -version 
 ```
 
+### The trustAnchors parameter must be non-empty 解决方案
+
+当出现
+```
+Exception in thread "main" javax.net.ssl.SSLException: java.lang.RuntimeException: Unexpected error: java.security.InvalidAlgorithmParameterException: the trustAnchors parameter must be non-empty.
+```
+
+解决方案：
+
+#### Ubuntu
+
+```bash
+# Ubuntu
+sudo apt install ca-certificates-java
+# CentOS
+sudo yum install ca-certificates
+
+# oracle JDK
+cp /etc/ssl/certs/java/cacerts $JAVA_HOME/lib/security/cacerts
+# open JDK
+cp /etc/ssl/certs/java/cacerts $JAVA_HOME/jre/lib/security/cacerts
+```
